@@ -1,7 +1,7 @@
 
 # Projeto 1- Quiz
 
-Uma breve descrição sobre o que esse projeto faz e para quem ele é
+Uma breve descrição sobre do que se trata este projeto
 
 O projeto se trata de um quiz com dezesseis perguntas sobre história.
 O usuário abre o documento, deve ler a pergunta e selecionar a resposta a qual acredita estar certa.
