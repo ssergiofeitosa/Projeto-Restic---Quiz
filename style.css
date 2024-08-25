@@ -1,0 +1,85 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background-image: url(fc9309d7f74b3431df23155faa34c9ad.jpg);
+    
+
+}
+.app{
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+
+}
+.app h1{
+    font-size: 35px;
+    color: black;
+    font-weight: 600;
+    border-bottom: 1px solid;
+    padding-bottom: 30px;
+}
+.quiz{
+    padding: 20px 0;
+}
+.quiz h2{
+    font-size: 20px;
+    color: black;
+    font-weight: 450%;
+    margin:20px;
+}
+.botao{
+    background-color: aliceblue;
+    color: black;
+    font-weight: 400;
+    width: 100%;
+    border:2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+.botao:hover{
+    background-color: rgb(0, 0, 0);
+    font-weight: bold;
+    color: #fff;
+}
+.botao:hover:not([disabled]){
+    background: #222;
+    color: #fff;
+}
+.botao:disabled{
+    cursor: no-drop;
+}
+#proximaQ{
+    background: #c4cad6;
+    color: #000000;
+    font-weight: 400;
+    border: 2px;
+    padding: 12px;
+    margin: 15px auto 0;
+    cursor: pointer;
+    display: block;
+    border-radius: 5px;
+    display: none;
+}
+#proximaQ:hover{
+    background-color: rgb(49, 70, 162);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+.correta{
+    background-color: chartreuse;
+}
+.incorreta{
+    background-color: red;
+}
