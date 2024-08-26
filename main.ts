@@ -1,13 +1,15 @@
+
+//define interface Resposta(a alternativa selecionada pelo usuario), que contem o texto da resposta e ela é correta ou não//
 interface Resposta {
     texto: string;
     correta: boolean;
 }
-
+//define interface Pergunta, que contem a questão e suas alternativas
 interface Pergunta {
     pergunta: string;
     respostas: Resposta[];
 }
-
+//vetor de objetos com as questões
 const perguntas: Pergunta[] = [
     {
         pergunta: "Quem foi o primeiro imperador romano?",
@@ -154,76 +156,82 @@ const perguntas: Pergunta[] = [
         ]
     }
 ];
-
+//referencia aos elementos DOM, que vão ser manipulados posteriormente
 const pergunta = document.getElementById("pergunta") as HTMLDivElement;
 const botaoResposta = document.getElementById("botaoresposta") as HTMLDivElement;
 const botaoProxima = document.getElementById("proximaQ") as HTMLButtonElement;
-
+//indice da questao atual e a pontução do usuário
 let indiceQuestaoAtual: number = 0;
 let pontuacao: number = 0;
 
+//função para inicializar/reinciar o quiz, zera a pontuação e o indice da questão atual
 function iniciarQuiz(): void {
     indiceQuestaoAtual = 0;
     pontuacao = 0;
     botaoProxima.innerHTML = "Próxima questão";
     mostrarQuestao();
 }
-
+//função para mostrar a questão  atual e suas alternativas
 function mostrarQuestao(): void {
     resetState();
     const questaoAtual = perguntas[indiceQuestaoAtual];
     const numeroQuestao = indiceQuestaoAtual + 1;
     pergunta.innerHTML = `${numeroQuestao}. ${questaoAtual.pergunta}`;
+    // Para cada resposta da questão atual, cria um botão e adiciona ao DOM
 
     questaoAtual.respostas.forEach(resposta => {
         const botao = document.createElement("button");
         botao.innerHTML = resposta.texto;
         botao.classList.add("botao");
         botaoResposta.appendChild(botao);
+        // Se a resposta é correta, adiciona um atributo customizado 'data-correta'
 
         if (resposta.correta) {
             botao.dataset.correta = String(resposta.correta);
         }
+         // Adiciona um listener para quando o botão for clicado
         botao.addEventListener("click", selecionarResposta);
     });
 }
-
+// função para resetar o estado da questão anterior (remover botões, esconder o botão "Próxima")
 function resetState(): void {
-    botaoProxima.style.display = "none";
+    botaoProxima.style.display = "none"; //esconde o botão "próxima"
     while (botaoResposta.firstChild) {
-        botaoResposta.removeChild(botaoResposta.firstChild);
+        botaoResposta.removeChild(botaoResposta.firstChild);// Remove todas as respostas anteriores
     }
 }
 
+// Função chamada ao clicar em uma resposta
 function selecionarResposta(e: MouseEvent): void {
     const botaoSelecionado = e.target as HTMLButtonElement;
-    const estaCorreta = botaoSelecionado.dataset.correta === "true";
+    const estaCorreta = botaoSelecionado.dataset.correta === "true";//verifica se a resposta esta correta
 
     if (estaCorreta) {
-        botaoSelecionado.classList.add("correta");
-        pontuacao++;
+        botaoSelecionado.classList.add("correta");//adiciona a classe "correta" se a resposta for correta
+        pontuacao++; //aumenta a pontuação do usuario
     } else {
-        botaoSelecionado.classList.add("incorreta");
+        botaoSelecionado.classList.add("incorreta");//adiciona a classe "incorreta" se a resposta for incorreta
     }
-
+    // Itera por todos os botões e desabilita-os, mostrando qual é a resposta correta
     Array.from(botaoResposta.children).forEach(botao => {
         const b = botao as HTMLButtonElement;
         if (b.dataset.correta === "true") {
             b.classList.add("correta");
         }
-        b.disabled = true;
+        b.disabled = true;// Desabilita os botões após a seleção
+
     });
 
     botaoProxima.style.display = "block";
 }
-
+// Função para mostrar a pontuação final após responder todas as perguntas
 function mostrarPontuacao(): void {
     resetState();
     pergunta.innerHTML = `Você acertou ${pontuacao} de ${perguntas.length}!`;
     botaoProxima.innerHTML = "Jogar novamente";
     botaoProxima.style.display = "block";
 }
-
+// Função para mostrar a próxima questão ou finalizar o quiz
 function mostraBotaoProxima(): void {
     indiceQuestaoAtual++;
     if (indiceQuestaoAtual < perguntas.length) {
@@ -232,7 +240,7 @@ function mostraBotaoProxima(): void {
         mostrarPontuacao();
     }
 }
-
+// Listener para o botão "Próxima", que mostra a próxima questão ou reinicia o quiz
 botaoProxima.addEventListener("click", () => {
     if (indiceQuestaoAtual < perguntas.length) {
         mostraBotaoProxima();
@@ -240,5 +248,5 @@ botaoProxima.addEventListener("click", () => {
         iniciarQuiz();
     }
 });
-
+// Inicializa o quiz assim que a página carrega
 iniciarQuiz();
