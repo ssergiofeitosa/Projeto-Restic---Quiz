@@ -1,6 +1,7 @@
 # Quiz de História
 
 Um quiz interativo sobre história mundial, desenvolvido com **TypeScript**, **HTML** e **CSS** puro. O objetivo é testar e aprimorar os conhecimentos históricos dos jogadores de forma divertida e educativa.
+![image](https://github.com/user-attachments/assets/4fe675ce-593d-49f0-8923-ee4b3002c28b)
 
 ## 🎯 Funcionalidades
 
